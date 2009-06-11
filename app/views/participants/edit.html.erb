@@ -1,0 +1,24 @@
+<h1>Editing participant</h1>
+
+<% form_for(@participant) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :activity_id %><br />
+    <%= f.text_field :activity_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Tillbaka', participants_path, { :class => 'button back' } %>
+<%= link_to 'Visa', @participant, { :class => 'button show' } %>

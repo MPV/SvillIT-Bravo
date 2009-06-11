@@ -1,0 +1,42 @@
+<h1>Alla medlemmar</h1>
+
+<table class="index">
+  <tr>
+    <th>Namn</th>
+    <%- if logged_in? -%>
+    <th>E-post</th>
+    <th>F&ouml;rnamn</th>
+    <th>Efternamn:</th>
+    <th>Ort:</th>
+    <% end %>
+    <th>Medlem sedan:</th>
+    <%- if logged_in? -%>
+    <th>Avgift betald?</th>
+    <th></th>
+    <th></th>
+    <%- end -%>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= link_to user.login, user %></td>
+    <%- if logged_in? %>
+    <td><%=h user.email %></td>
+    <td><%= user.name %></td>
+    <td><%= user.surname %></td>
+    <td><%= user.city %></td>
+    <% end %>
+    <td><%= distance_of_time_in_words_to_now(user.created_at) %> ago</td>
+    <%- if logged_in? -%>
+    <td><% if user.fee_payed %><% image_tag '/images/silk-icons/tick.png' %><% end %></td>
+    <td><%= link_to image_tag("/images/silk-icons/pencil.png", :border => 0, :alt => '&Auml;ndra'), edit_user_path(user) %></td>
+    <td><%= link_to image_tag("/images/silk-icons/cross.png", :border => 0, :alt => 'Ta bort'), user, :confirm => '&Auml;r du s&auml;ker?', :method => :delete %></td>
+    <%- end -%>
+  </tr>
+<% end %>
+</table>
+
+<% if logged_in? %>
+<br />
+<%= link_to 'Ny medlem', new_user_path, { :class => 'button add' } %>
+<% end %>

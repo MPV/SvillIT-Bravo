@@ -1,0 +1,18 @@
+<h1><%=h @advertising_space.name %></h1>
+<p>
+  <%=h @advertising_space.description %>
+</p>
+
+<h2>Annonser p&aring; <%=h @advertising_space.name.downcase %>:</h2>
+<% if @advertising_space.ads.count > 0 %>
+<ul>
+<% for ad in @advertising_space.ads %>
+<li><%= link_to ad.name, ad %></li>
+<% end %>
+</ul>
+<% else %>
+<p>Inga annonser.</p>
+<% end %>
+
+<%= link_to '&Auml;ndra', edit_advertising_space_path(@advertising_space), {:class => 'button edit'} %>
+<%= link_to 'Tillbaka', advertising_spaces_path, {:class => 'button back'} %>

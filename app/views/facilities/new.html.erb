@@ -1,0 +1,11 @@
+<h1>Ny facilitet</h1>
+
+<% form_for(@facility) do |f| %>
+  <%= f.error_messages %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <p>
+    <%= f.submit 'Skapa' %>
+  </p>
+<% end %>
+
+<%= link_to 'Tillbaka', facilities_path, { :class => 'button back' } %>

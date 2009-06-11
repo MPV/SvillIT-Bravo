@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  facitity_id: 1
+  start: 2009-05-19 13:26:55
+  end: 2009-05-19 13:26:55
+  result: MyText
+
+two:
+  name: MyString
+  facitity_id: 1
+  start: 2009-05-19 13:26:55
+  end: 2009-05-19 13:26:55
+  result: MyText

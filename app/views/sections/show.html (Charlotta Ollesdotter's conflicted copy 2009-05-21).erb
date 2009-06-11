@@ -1,0 +1,35 @@
+<h1><%=h @section.name %></h1>
+
+<h2>Undergrupper:</h2>
+<% if @section.activities.count > 0 %>
+<ul>
+<% for group in @subgroups %>
+<li><%= link_to group.name, group %></li>
+<% end %>
+</ul>
+<%- else -%>
+<p>Inga grupper i sektionen.</p>
+<%- end -%>
+
+<%- if @section.activities.count == 0 -%>
+<h2>1 aktivitet</h2>
+<%- else -%>
+<h2><%= @section.activities.count %> aktiviteter:</h2>
+<%- end %>
+<% if @section.activities.count > 0 %>
+<ul>
+<% for activity in @section.activities %>
+<li><%= link_to activity.name, activity %></li>
+<% end %>
+</ul>
+<% else %>
+<h2>Aktiviteter:</h2>
+<p>Inga aktiviteter i sektionen.</p>
+<% end %>
+
+&larr;
+<%= link_to 'Tillbaka till alla sektioner', sections_path %>
+<%- if logged_in? && current_user.is_admin? -%>
+ | 
+<%= link_to '&Auml;ndra', edit_section_path(@section) %>
+<%- end -%>

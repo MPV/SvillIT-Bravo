@@ -1,0 +1,20 @@
+<p>
+  <%= f.label :name, 'Namn' %><br />
+  <%= f.text_field :name %>
+</p>
+<p>
+  <%= f.label :section_id, 'Sektion' %><br />
+  <%= f.collection_select :section_id, Section.find(:all, :order => :name), :id, :name %>
+</p>
+<p>
+  <%= f.label :parent_id, '&Ouml;verliggande grupp' %><br />
+  <%#= f.collection_select :parent_id, Group.find(:all, :order => :name), :id, :name, :include_blank => true %>
+  <select name="group[parent_id]">
+    <option></option>
+    <%= option_groups_from_collection_for_select(Section.find(:all, :include => :groups, :order => 'groups.name'), :groups, :name, :id, :name, :parent_id) %>
+  </select>
+</p>
+<p>
+  <%= f.label :coach_id, 'Tr&auml;nare' %><br />
+  <%= f.collection_select :coach_id, User.find(:all, :order => :login), :id, :login, :include_blank => true %>
+</p>

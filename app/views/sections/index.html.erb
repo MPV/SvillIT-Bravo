@@ -1,0 +1,30 @@
+<h1>Alla sektioner</h1>
+
+<table class="index">
+  <tr>
+    <th>Namn:</th>
+    <th>Undergrupper:</th>
+    <th>Aktiviteter:</th>
+    <%- if logged_in? && current_user.is_admin? -%>
+    <th></th>
+    <th></th>
+    <%- end -%>
+  </tr>
+
+<% @sections.each do |section| %>
+  <tr>
+    <td><%= link_to section.name, section %></td>
+    <td><%= section.groups.count %></td>
+    <td><%= section.activities.count %></td>
+    <%- if logged_in? && current_user.is_admin? -%>
+    <td class="icon"><%= link_to image_tag("/images/silk-icons/pencil.png", :border => 0, :alt => '&Auml;ndra'), edit_section_path(section) %></td>
+    <td class="icon"><%= link_to image_tag("/images/silk-icons/cross.png", :border => 0, :alt => 'Ta bort'), section, :confirm => 'Are you sure?', :method => :delete %></td>
+    <%- end -%>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<%- if logged_in? && current_user.is_admin? -%>
+<%= link_to 'Ny sektion', new_section_path, { :class => 'button add' } %>
+<%- end -%>

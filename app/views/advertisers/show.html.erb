@@ -1,0 +1,15 @@
+<h1><%=h @advertiser.name %></h1>
+
+<h2><%=h @advertiser.name %>s annonser:</h2>
+<% if @advertiser.ads.count > 0 %>
+<ul>
+<% for ad in @advertiser.ads %>
+<li><%= link_to ad.name, ad %></li>
+<% end %>
+</ul>
+<% else %>
+<p>Inga annonser.</p>
+<% end %>
+
+<%= link_to '&Auml;ndra', edit_advertiser_path(@advertiser), { :class => 'button edit' } %>
+<%= link_to 'Tillbaka', advertisers_path, { :class => 'button back' } %>

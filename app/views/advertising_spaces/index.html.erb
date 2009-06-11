@@ -1,0 +1,19 @@
+<h1>Alla annonsplatser</h1>
+
+<table class="index">
+  <tr>
+    <th>Namn</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @advertising_spaces.each do |advertising_space| %>
+  <tr>
+    <td><%= link_to advertising_space.name, advertising_space %></td>
+    <td><%= link_to image_tag("/images/silk-icons/pencil.png", :border => 0, :alt => '&Auml;ndra'), edit_advertising_space_path(advertising_space) %></td>
+    <td><%= link_to image_tag("/images/silk-icons/cross.png", :border => 0, :alt => 'Ta bort'), advertising_space, :confirm => '&Auml;r du s&auml;ker?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Ny annonsplats', new_advertising_space_path, { :class => 'button add' } %>

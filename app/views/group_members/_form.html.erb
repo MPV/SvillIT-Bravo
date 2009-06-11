@@ -1,0 +1,8 @@
+<p>
+  <%= f.label :group_id, 'Grupp' %><br />
+  <%= f.collection_select :group_id, Group.find(:all), :id, :name %>
+</p>
+<p>
+  <%= f.label :user_id, 'Person' %><br />
+  <%= f.collection_select :user_id, User.find(:all), :id, :login %>
+</p>

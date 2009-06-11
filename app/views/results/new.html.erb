@@ -1,0 +1,11 @@
+<h1>Nytt resultat</h1>
+
+<% form_for(@result) do |f| %>
+  <%= f.error_messages %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <p>
+    <%= f.submit 'Skapa' %>
+  </p>
+<% end %>
+
+<%= link_to 'Tillbaka', results_path, { :class => 'button back' } %>

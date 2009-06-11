@@ -1,0 +1,9 @@
+<h1>Resultat f&ouml;r <%= link_to @result.activity.name, @result.activity %></h1>
+<p>
+  <%=h @result.description %>
+</p>
+
+<%= link_to 'Tillbaka', :back, { :class => 'button back' } %>
+<% if logged_in? && (current_user.is_coach || current_user.is_admin?) %>
+<%= link_to '&Auml;ndra', edit_result_path(@result), { :class => 'button edit' } %>
+<% end %>

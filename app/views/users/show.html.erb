@@ -1,0 +1,82 @@
+<h1><%= @user.login %></h1>
+
+<p><b>Status:</b>
+<% if @user.is_admin? %>
+Kanslist
+<% elsif @user.is_coach? %>
+Tr&auml;nare
+<% else %>
+Medlem
+<% end %>
+</p>
+
+<p><b>Medlemsavgift:</b>
+<% if @user.fee_payed? %>betald<% else %>ej betald<% end %>.</p>
+
+<%- if logged_in? %>
+
+<p>
+  <b>Namn:</b>
+  <%= @user.name %> <%= @user.surname %>
+</p>
+
+<%- if current_user.is_admin? -%>
+  <p>
+    <b>Personnummer:</b>
+    <%= @user.national_id %>
+  </p>
+  
+  <p>
+    <b>Telefon:</b>
+    <%= @user.phone %>
+  </p>
+  
+  <p>
+    <b>E-post:</b>
+    <%= @user.email %>
+  </p>
+  
+  <p>
+    <b>Adress:</b>
+    <%= @user.street %><br/>
+    <%= @user.postal_code %> <%= @user.city %>
+  </p>
+<%- end -%>
+
+<% end %>
+
+<p><b>Anm&auml;ld till aktiviteter:</b></p>
+<% if @user.activities.count > 0 %>
+<ul>
+<% for activity in @user.activities %>
+<li><%= link_to activity.name, activity %></li>
+<% end %>
+</ul>
+<% else %>
+<p><%= @user.name %> &auml;r inte med i n&aring;gra aktiviteter.</p>
+<% end %>
+
+<p><b>Med i sektioner och grupper:</b></p>
+<% if @user.groups.count > 0 %>
+<ul>
+<% for group in @user.groups %>
+<li><%= link_to group.section.name, group.section %> &rarr; <%= link_to group.name, group %></li>
+<% end %>
+</ul>
+<% else %>
+<p><%= @user.name %> &auml;r inte med i n&aring;gra grupper.</p>
+<% end %>
+
+<p><b><%= @user.name %>s uppdrag:</b></p>
+<ul>
+<% for task in @user.tasks %>
+<li><%= link_to task.name, task %></li>
+<% end %>
+</ul>
+
+<p>Antal bonuspo&auml;ng: 0</p>
+
+<%= link_to 'Tillbaka till alla medlemmar', users_path, { :class => 'button back' } %>
+<%- if logged_in? && current_user.is_admin? %>
+<%= link_to '&Auml;ndra', edit_user_path, { :class => 'button edit' } %>
+<% end %>

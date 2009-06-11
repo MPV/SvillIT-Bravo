@@ -1,0 +1,24 @@
+<p>
+  <%= f.label :name, "Namn" %><br />
+  <%= f.text_field :name %>
+</p>
+  <p>
+  <%= f.label :section_id, "Sektion" %><br />
+  <%= f.collection_select :section_id, Section.find(:all, :order => :name), :id, :name, :include_blank => true %>
+</p>
+<p>
+  <%= f.label :activity_type, "Typ av aktivitet" %><br />
+  <%= f.select :activity_type, ["Läger", "Match", "Motionspass", "Träning", "Tävling"], :include_blank => true %>
+</p>
+<p>
+  <%= f.label :facility_id, "Plats" %><br />
+  <%= f.collection_select :facility_id, Facility.find(:all, :order => :name), :id, :name, :include_blank => true %>
+</p>
+<p>
+  <%= f.label :start, "Startar" %><br />
+  <%= f.datetime_select :start %>
+</p>
+<p>
+  <%= f.label :end, "Slutar" %><br />
+  <%= f.datetime_select :end %>
+</p>

@@ -1,0 +1,105 @@
+<fieldset>
+	<legend>Konto:</legend>
+
+<p>
+  <span class="mandatory">*</span>
+  <%= f.label :login, 'Anv&auml;ndarnamn' %><br/>
+  <%= f.text_field :login %>
+</p>
+
+<p>
+  <span class="mandatory">*</span>
+  <%= f.label :password, 'L&ouml;senord' %><br/>
+  <%= f.password_field :password %>
+</p>
+
+<p>
+  <span class="mandatory">*</span>
+  <%= f.label :password_confirmation, 'L&ouml;senord (igen)' %><br/>
+  <%= f.password_field :password_confirmation %>
+</p>
+
+<p>
+  <span class="mandatory">*</span>
+  <%= f.label :email, 'E-post' %><br/>
+  <%= f.text_field :email %>
+</p>
+
+</fieldset>
+
+<fieldset>
+	<legend>Kontaktuppgifter:</legend>
+
+<p>
+  <span class="mandatory">*</span>
+  <%= f.label :name, 'F&ouml;rnamn' %><br />
+  <%= f.text_field :name %>
+</p>
+
+<p>
+  <span class="mandatory">*</span>
+  <%= f.label :surname, 'Efternamn' %><br />
+  <%= f.text_field :surname %>
+</p>
+
+<p>
+  <span class="mandatory">*</span>
+  <%= f.label :national_id, 'Personnummer' %><br />
+  <%= f.text_field :national_id %>
+  <span class="explanation">Skrivs s&aring;h&auml;r: &aring;&aring;mmdd-xxxx</span>
+</p>
+
+<p>
+  <span class="mandatory">*</span>
+  <%= f.label :phone, 'Telefon' %><br />
+  <%= f.text_field :phone %>
+</p>
+
+<p>
+  <span class="mandatory">*</span>
+  <%= f.label :street, 'Gata' %><br />
+  <%= f.text_field :street %>
+</p>
+
+<p>
+  <span class="mandatory">*</span>
+  <%= f.label :postal_code, 'Postnummer' %><br />
+  <%= f.text_field :postal_code %>
+</p>
+
+<p>
+  <span class="mandatory">*</span>
+  <%= f.label :city, 'Ort' %><br />
+  <%= f.text_field :city %>
+</p>
+
+</fieldset>
+
+<% if logged_in? && current_user.is_admin? %>
+
+<fieldset>
+	<legend>Inst&auml;llningar:</legend>
+
+<p>
+  <%= f.check_box :is_admin %>
+  <%= f.label :is_admin, '&Auml;r kanslist?' %>
+</p>
+
+<p>
+  <%= f.check_box :is_coach %>
+  <%= f.label :is_coach, '&Auml;r tr&auml;nare?' %>
+</p>
+
+<p>
+  <%= f.check_box :is_pr_admin %>
+  <%= f.label :is_pr_admin, '&Auml;r reklamansvarig?' %>
+</p>
+
+<p>
+  <%= f.check_box :fee_payed %>
+  <%= f.label :fee_payed, 'Avgift betald?' %>
+</p>
+
+</fieldset>
+
+<% end %>

@@ -1,0 +1,12 @@
+<p>
+  <b>Grupp:</b>
+  <%= link_to @group_member.group.name, @group_member.group %>
+</p>
+
+<p>
+  <b>Person:</b>
+  <%= link_to @group_member.user.login, @group_member.user %>
+</p>
+
+<%= link_to 'Tillbaka', group_members_path, { :class => 'button back' } %>
+<%= link_to '&Auml;ndra', edit_group_member_path(@group_member), { :class => 'button edit' } %>

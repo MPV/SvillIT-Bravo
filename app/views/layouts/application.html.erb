@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>SvillIT <%= controller.controller_name %></title>
+  <%= stylesheet_link_tag 'scaffold' %>
+  <%= stylesheet_link_tag 'svillit' %>
+  <%= javascript_include_tag :defaults %>
+</head>
+<body>
+<div id="container">
+  <div id="header"><a href="/">SvillIT</a></div>
+  <div id="menu">
+    <ul>
+      
+		<% if (controller.controller_name == "dashboard") -%><li class="current"><% else -%><li><% end -%>
+      	<%= link_to 'Hem', { :controller => :dashboard }%></li>
+		<% if (controller.controller_name == "calendar") -%><li class="current"><% else -%><li><% end -%>
+      	<%= link_to 'Kalender', { :controller => :calendar }%></li>
+		<% if (controller.controller_name == "activities") -%><li class="current"><% else -%><li><% end -%>
+      	<%= link_to 'Aktiviteter', { :controller => :activities }%></li>
+      	<% if (controller.controller_name == "facilities") -%><li class="current"><% else -%><li><% end -%>
+      	<%= link_to 'Faciliteter', { :controller => :facilities }%></li>
+      	<% if (controller.controller_name == 'users' && (logged_in? || controller.action_name != 'new')) -%><li class="current"><% else -%><li><% end -%>
+      	<%= link_to 'Medlemmar', { :controller => :users }%></li>
+      	<% if (controller.controller_name == 'sections') -%><li class="current"><% else -%><li><% end -%>
+      	<%= link_to 'Sektioner', { :controller => :sections }%></li>
+
+	  <% if logged_in? && current_user.is_pr_admin? %>
+
+      	<% if (controller.controller_name == 'advertisers') -%><li class="current"><% else -%><li><% end -%>
+      	<%= link_to 'Annons&ouml;rer', { :controller => :advertisers }%></li>
+      	<% if (controller.controller_name == 'advertising_spaces') -%><li class="current"><% else -%><li><% end -%>
+      	<%= link_to 'Annonsplatser', { :controller => :advertising_spaces }%></li>
+      	<% if (controller.controller_name == 'ads') -%><li class="current"><% else -%><li><% end -%>
+      	<%= link_to 'Annonser', { :controller => :ads }%></li>
+
+	  <% end %>
+
+	  <% if logged_in? %>
+		
+      	<% if (controller.controller_name == 'tasks') -%><li class="current"><% else -%><li><% end -%>
+      	<%= link_to 'Uppdrag', { :controller => :tasks }%></li>
+
+	  <% end %>
+      	
+	  <% if logged_in? && current_user.is_admin? %>
+
+      	<% if (controller.controller_name == 'bookings') -%><li class="current"><% else -%><li><% end -%>
+    	<%= link_to 'Bokningar', { :controller => :bookings }%></li>
+      	<% if (controller.controller_name == 'groups') -%><li class="current"><% else -%><li><% end -%>
+      	<%= link_to 'Grupper', { :controller => :groups }%></li>
+      
+	  <% end %>
+      
+		<% if (controller.controller_name == 'contact') -%><li class="current"><% else -%><li><% end -%>
+      	<%= link_to 'Kontakt', { :controller => :contact }%></li>
+	 
+	  <% if logged_in? %>
+      
+	  	<% if (controller.controller_name == "sessions") -%><li class="current special"><% else -%><li class="special"><% end -%>
+        <%= link_to 'Logga ut', logout_path %></li>
+        <% if (controller.controller_name == "users" && controller.action_name == 'edit' && current_user.id == params[:id]) -%><li class="current special"><% else -%><li class="special"><% end -%>
+        <%= link_to 'Min profil', { :controller => :users, :action => 'edit', :id => current_user.id } %></li>
+      
+	  <% else %>
+      
+	  	<% if (controller.controller_name == "sessions") -%><li class="current special"><% else -%><li class="special"><% end -%>
+      	<%= link_to 'Logga in', login_path %></li>
+      	<% if (controller.controller_name == 'users' && controller.action_name == 'new') -%><li class="current special"><% else -%><li class="special"><% end -%>
+      	<%= link_to 'Registrera mig', { :controller => :users, :action => 'new' } %></li>
+      
+	  <% end %>
+    
+	</ul>
+  </div>
+  <br class="break" />
+  <div id="content-<%= controller.controller_name %>" class="content">
+    <%#<p id="flash" style="color: green"><%= flash[:notice] %>
+    <% flash.each do |key, msg| %>
+      <%= content_tag :div, msg, :class => "flash", :id => "flash_#{key}" %>
+      <% content_tag :script, :type => "text/javascript" do %>
+        $('flash_<%= key %>').style.display = 'none';
+        new Effect.Appear('flash_<%= key %>', {duration: 1});
+      <% end %>
+
+      <% content_tag :script, :type => "text/javascript" do %>
+        setTimeout("new Effect.Fade('flash_<%= key %>');", 3000);
+      <% end %>
+    <% end %>
+    <%= yield %>
+    <br class="clear" />
+  </div>
+  <div id="footer">
+    SvillIT - Bravo edition 
+  </div>
+</div>
+</body>
+</html>

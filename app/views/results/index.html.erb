@@ -1,0 +1,23 @@
+<h1>Alla aktiviteters resultat</h1>
+
+<table class="index">
+  <tr>
+    <th>Aktivitet</th>
+    <th>Resultat</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @results.each do |result| %>
+  <tr>
+    <td><%= link_to result.activity.name, result.activity %></td>
+    <td><%= link_to result.description[0..30] + '...', result %></td>
+    <td class="icon"><%= link_to image_tag("/images/silk-icons/pencil.png", :border => 0, :alt => '&Auml;ndra'), edit_result_path(result) %></td>
+    <td class="icon"><%= link_to image_tag("/images/silk-icons/cross.png", :border => 0, :alt => 'Ta bort'), result, :confirm => '&Auml;r du s&auml;ker?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nytt resultat', new_result_path, { :class => 'button add' } %>

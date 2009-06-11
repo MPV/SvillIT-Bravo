@@ -1,0 +1,46 @@
+<h1><%=h @section.name %></h1>
+
+<p><%=h @section.description %></p>
+
+<h2>Undergrupper:</h2>
+<% if @section.groups.count > 0 %>
+<ul>
+<% for group in @subgroups %>
+<li><%= link_to group.name, group %></li>
+<% end %>
+</ul>
+<%- else -%>
+<p>Inga grupper i sektionen.</p>
+<%- end -%>
+
+<h2>Aktiviteter:</h2>
+
+<%= calendar_for(2009, 5, :use_full_day_names => true, :first_day_of_week => 1) do |day|
+	cell_text  = "#{day.mday}<div class=\"daysActivities\"> "
+	cell_attrs = { :class => 'day' }
+	@section.activities.each do |a|
+	  if a.start.mday == day.mday
+	    cell_text << link_to(a.name, a) << '<br />'
+		cell_attrs[:class] = 'specialDay'
+	  end
+	end
+	cell_text << '</div>'
+	[cell_text, cell_attrs]
+
+end 
+%>
+
+<% if @section.activities.count > 0 %>
+<ul>
+<% for activity in @section.activities %>
+<li><%= link_to activity.name, activity %></li>
+<% end %>
+</ul>
+<% else %>
+<p>Inga aktiviteter i sektionen.</p>
+<% end %>
+
+<%= link_to 'Tillbaka till alla sektioner', sections_path, { :class => 'button back' } %>
+<%- if logged_in? && current_user.is_admin? -%>
+<%= link_to '&Auml;ndra', edit_section_path(@section), { :class => 'button edit' } %>
+<%- end -%>

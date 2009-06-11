@@ -1,0 +1,15 @@
+<h1>Logga in</h1>
+
+<% form_tag session_path do -%>
+<p><label for="login">Anv&auml;ndarnamn</label><br/>
+<%= text_field_tag 'login' %></p>
+
+<p><label for="password">L&ouml;senord</label><br/>
+<%= password_field_tag 'password' %></p>
+
+<p><label for="remember_me">Kom ih&aring;g mig</label>
+<%= check_box_tag 'remember_me' %></p>
+
+<%= submit_tag 'Logga in' %>
+<a href="#" class="button help">Gl&ouml;mt l&ouml;senord</a>
+<% end -%>

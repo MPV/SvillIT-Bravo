@@ -1,0 +1,27 @@
+<h1>Alla bokningar</h1>
+
+<table class="index">
+  <tr>
+    <th>Bokningens namn</th>
+    <th>Plats</th>
+    <th>B&ouml;rjar</th>
+    <th>Slutar</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bookings.each do |booking| %>
+  <tr>
+    <td><%= link_to booking.name, booking %></td>
+    <td><%= link_to booking.facility.name, booking.facility %></td>
+    <td><%=h booking.start.to_s(:short) %></td>
+    <td><%=h booking.end.to_s(:short) %></td>
+    <td class="icon"><%= link_to image_tag("/images/silk-icons/pencil.png", :border => 0, :alt => '&Auml;ndra'), edit_booking_path(booking) %></td>
+    <td class="icon"><%= link_to image_tag("/images/silk-icons/cross.png", :border => 0, :alt => 'Ta bort'), booking, :confirm => '&Auml;r du s&auml;ker?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Ny bokning', new_booking_path, { :class => 'button add' } %>

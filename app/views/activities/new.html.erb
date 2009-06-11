@@ -1,0 +1,8 @@
+<h1>Ny aktivitet</h1>
+
+<% form_for(@activity) do |f| %>
+  <%= f.error_messages %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+    <%= link_to 'Tillbaka', activities_path, { :class => 'button back' } %>
+    <%= f.submit 'Skapa' %>
+<% end %>

@@ -1,0 +1,38 @@
+<h1>Kalendern</h1>
+
+<!-- LaterDude: -->
+<%#= calendar_for(2009, 1, :first_day_of_week => 1) %>
+<%= calendar_for(
+	Time.now.year, 
+    @month,  #Time.now.month, 
+	:first_day_of_week => 1, 
+    :use_full_day_names => true,
+    :next_month => link_to('&raquo;', { :controller => 'calendar', :action => 'index', :year => @next_year, :month => @next_month}),
+    :previous_month => link_to('&laquo;', { :controller => 'calendar', :action => 'index', :year => @prev_year, :month => @prev_month})
+	#:previous_month => link_to('&laquo;', { :controller => :calendar, :month => }), 
+	#:next_month => '&raquo;'
+	#:next_month => lambda { |date| link_to "&raquo;", calendar_path(date.year, month.year) }
+	) do |day|
+	cell_text  = "#{day.mday}<div class=\"daysActivities\"> "
+	cell_attrs = { :class => 'day' }
+	@activities.each do |a|
+	  if a.start.mday == day.mday && a.start.month == day.month
+	    cell_text << link_to(a.name, a) << '<br />'
+		cell_attrs[:class] = 'specialDay'
+	  end
+	end
+	cell_text << '</div>'
+	[cell_text, cell_attrs]
+
+#  if Calendar.has_events_on?(day)
+#    [link_to(day.day, events_path(day.year, day.month, day.day)), { :class => "dayWithEvents" }]
+#  else
+#    day.day
+#  end
+end 
+%>
+
+
+
+<!-- Calendar Helper: -->
+<%#= calendar(:year => 2005, :month => 6) %>

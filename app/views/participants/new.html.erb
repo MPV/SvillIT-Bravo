@@ -1,0 +1,23 @@
+<h1>Ny aktivitetsdeltagare</h1>
+
+<% form_for(@participant) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name, 'Namn' %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :user_id, 'PersonID' %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :activity_id, 'AktivitetsID' %><br />
+    <%= f.text_field :activity_id %>
+  </p>
+  <p>
+    <%= f.submit 'Skapa' %>
+  </p>
+<% end %>
+
+<%= link_to 'Tillbaka', participants_path, { :class => 'button back' } %>

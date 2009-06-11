@@ -1,0 +1,41 @@
+<h1>Alla huvudgrupper</h1>
+
+<table class="index">
+  <tr>
+    <th>Sektion:</th>
+    <th>Huvudgrupp:</th>
+    <th>Undergrupper:</th>
+	<th>Medlemmar:</th>
+    <%- if logged_in? && current_user.is_admin? -%>
+    <th></th>
+    <th></th>
+    <%- end -%>
+  </tr>
+
+<% @groups.each do |group| %>
+  <tr>
+    <td><%= link_to group.section.name, group.section %></td>
+    <td>
+      <%= link_to group.name, group %>
+    </td>
+    <td>
+      <%- if group.subgroups.count > 0 -%>
+      <%= link_to group.subgroups.count, group %>
+      <%- end -%>
+    </td>
+	<td>
+	  <%= group.users.count %>
+	</td>
+    <%- if logged_in? && current_user.is_admin? -%>
+    <td class="icon"><%= link_to image_tag("/images/silk-icons/pencil.png", :border => 0, :alt => '&Auml;ndra'), edit_group_path(group) %></td>
+    <td class="icon"><%= link_to image_tag("/images/silk-icons/cross.png", :border => 0, :alt => 'Ta bort'), group, :confirm => 'Are you sure?', :method => :delete %></td>
+    <%- end -%>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%- if logged_in? && current_user.is_admin? -%>
+<%= link_to 'Ny grupp', new_group_path, { :class => 'button add' } %>
+<%- end -%>

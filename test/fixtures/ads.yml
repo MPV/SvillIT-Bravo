@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  advertiser_id: 1
+  advertising_space_id: 1
+  start: 2009-05-25 21:03:13
+  end: 2009-05-25 21:03:13
+
+two:
+  name: MyString
+  advertiser_id: 1
+  advertising_space_id: 1
+  start: 2009-05-25 21:03:13
+  end: 2009-05-25 21:03:13

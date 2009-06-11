@@ -1,0 +1,20 @@
+  <p>
+    <%= f.label :name, 'Namn p&aring; annonsen' %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :advertiser_id, 'Annons&ouml;r' %><br />
+    <%= f.collection_select :advertiser_id, Advertiser.all, :id, :name, :include_blank => true %>
+  </p>
+  <p>
+    <%= f.label :advertising_space_id, 'Annonsplats' %><br />
+    <%= f.collection_select :advertising_space_id, AdvertisingSpace.all, :id, :name, :include_blank => true %>
+  </p>
+  <p>
+    <%= f.label :start, 'B&ouml;rjar' %><br />
+    <%= f.datetime_select :start %>
+  </p>
+  <p>
+    <%= f.label :end, 'Slutar' %><br />
+    <%= f.datetime_select :end %>
+  </p>

@@ -1,0 +1,25 @@
+<h1>Alla faciliteter</h1>
+
+<table class="index">
+  <tr>
+    <th>Namn</th>
+    <th>Typ</th>
+    <th>Timpris</th>
+  </tr>
+
+<% @facilities.each do |facility| %>
+  <tr>
+    <td><%= link_to facility.name, facility %></td>
+    <td><%=h facility.type %></td>
+    <td><%=h facility.hourly_fee %><% if(facility.hourly_fee != nil) %> kr<% end %></td>
+    <% if logged_in? && current_user.is_admin %>
+    <td>ÄNDRA</td>
+    <td>TA BORT</td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<% if logged_in? && current_user.is_admin %>
+  <%= link_to 'Ny', add_facility_path %> 

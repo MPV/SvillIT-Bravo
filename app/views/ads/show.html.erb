@@ -1,0 +1,25 @@
+<h1><%=h @ad.name %></h1>
+
+<p>
+  <b>Annons&ouml;r:</b>
+  <%= link_to @ad.advertiser.name, @ad.advertiser %>
+</p>
+
+<p>
+  <b>Annonsplats:</b>
+  <%= link_to @ad.advertising_space.name, @ad.advertising_space %>
+</p>
+
+<p>
+  <b>Startar:</b>
+  <%=h @ad.start %>
+</p>
+
+<p>
+  <b>Slutar:</b>
+  <%=h @ad.end %>
+</p>
+
+
+<%= link_to '&Auml;ndra', edit_ad_path(@ad), { :class => 'button edit' } %>
+<%= link_to 'Tillbaka', ads_path, { :class => 'button back' } %>

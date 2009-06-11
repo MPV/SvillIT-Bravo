@@ -1,0 +1,12 @@
+<h1>&Auml;ndra bokning</h1>
+
+<% form_for(@booking) do |f| %>
+  <%= f.error_messages %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <p>
+    <%= f.submit 'Uppdatera' %>
+  </p>
+<% end %>
+
+<%= link_to 'Tillbaka', bookings_path, { :class => 'button back' } %>
+<%= link_to 'Visa', @booking, { :class => 'button show' } %>

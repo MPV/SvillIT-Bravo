@@ -1,0 +1,27 @@
+<h1>Alla annonser</h1>
+
+<table class="index">
+  <tr>
+    <th>Annonsens namn</th>
+    <th>Annons&ouml;r</th>
+    <th>Annonsplats</th>
+    <th>B&ouml;rjar</th>
+    <th>Slutar</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ads.each do |ad| %>
+  <tr>
+    <td><%= link_to ad.name, ad %></td>
+    <td><%= link_to ad.advertiser.name, ad.advertiser %></td>
+    <td><%= link_to ad.advertising_space.name, ad.advertising_space %></td>
+    <td><%=h ad.start %></td>
+    <td><%=h ad.end %></td>
+    <td class="icon"><%= link_to image_tag("/images/silk-icons/pencil.png", :border => 0, :alt => '&Auml;ndra'), edit_ad_path(ad) %></td>
+    <td class="icon"><%= link_to image_tag("/images/silk-icons/cross.png", :border => 0, :alt => 'Ta bort'), ad, :confirm => '&Auml;r du s&auml;ker?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Ny annons', new_ad_path, { :class => 'button add' } %>

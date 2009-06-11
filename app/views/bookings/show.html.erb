@@ -1,0 +1,25 @@
+<h1><%=h @booking.name %></h1>
+
+<p>
+  <%=h @booking.description %>
+</p>
+
+<p>
+  <b><%= @booking.facility.facility_type %>:</b>
+  <%=h @booking.facility.name %>
+</p>
+
+<p>
+  <b>B&ouml;rjar:</b>
+  <%=h @booking.start %>
+</p>
+
+<p>
+  <b>Slutar:</b>
+  <%=h @booking.end %>
+</p>
+
+<%= link_to 'Tillbaka', :back, { :class => 'button back' } %>
+<%- if logged_in? && current_user.is_admin? -%>
+<%= link_to '&Auml;ndra', edit_booking_path(@booking), { :class => 'button edit' } %>
+<%- end -%>

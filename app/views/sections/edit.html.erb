@@ -1,0 +1,12 @@
+<h1>&Auml;ndrar sektion</h1>
+
+<% form_for(@section) do |f| %>
+  <%= f.error_messages %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <p>
+    <%= f.submit 'Uppdatera' %>
+  </p>
+<% end %>
+
+<%= link_to 'Tillbaka', sections_path, { :class => 'button back' } %>
+<%= link_to 'Visa', @section, { :class => 'button show' } %>

@@ -1,0 +1,43 @@
+<h1><%= @activity.name %></h1>
+
+<p>
+  <b>N&auml;r: </b> <%=h @activity.start %> till <%=h @activity.end %>
+</p>
+
+<p>
+  <b>Plats:</b>
+  <%= link_to @activity.facility.name, @activity.facility %>
+</p>
+
+<h2><%= @activity.participants.count %> anm&auml;lda:</h2>
+
+<ul>
+<% for participant in @activity.participants %>
+<li>
+<%= link_to "#{participant.user.name} #{participant.user.surname}", participant.user %>
+<%- if logged_in? && participant.user == current_user -%>
+  (<%= link_to 'Dra tillbaka min anm&auml;lan', participant, :method => :delete %>)
+<%- end -%>
+</li>
+<% end %>
+</ul>
+
+<% unless logged_in? %>
+<p>
+  F&ouml;r att kunna anm&auml;la dig beh&ouml;ver du vara inloggad.
+</p>
+<% end %>
+
+<% if logged_in? && (current_user.is_coach? || current_user.is_admin? ) %>
+<%= link_to '&Auml;ndra', edit_activity_path(@activity), { :class => 'button edit' } %>
+<% end %>
+<%= link_to 'Tillbaka', activities_path, { :class => 'button back' } %>
+<% if logged_in? && !current_user.is_coach? %>
+<%= link_to 'Anm&auml;l mig!', { :controller => :participants, :action => 'create', :participant => { :user_id => current_user.id, :activity_id => @activity.id } }, { :method => :post, :class => 'button join' } %>  
+<% end %>
+<% if logged_in? && (current_user.is_coach? || current_user.is_admin?) %>
+<%= link_to 'Registrera resultat', new_result_path, { :class => 'button add' } %>
+<% end %>
+<%- if @activity.result != nil -%>
+<%= link_to 'Visa resultat', @activity.result, { :class => 'button show result' } %>
+<%- end -%>

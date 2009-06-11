@@ -1,0 +1,18 @@
+<p>
+  <b>Name:</b>
+  <%=h @participant.name %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @participant.user_id %>
+</p>
+
+<p>
+  <b>Activity:</b>
+  <%=h @participant.activity_id %>
+</p>
+
+
+<%= link_to '&Auml;ndra', edit_participant_path(@participant), { :class => 'button edit' } %> |
+<%= link_to 'Tillbaka', participants_path %>

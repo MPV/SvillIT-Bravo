@@ -1,0 +1,22 @@
+<h1><%=h @task.name %></h1>
+
+<p>
+  <%=h @task.description %>
+</p>
+
+<% if @task.user_id != nil %>
+<p>
+  <b>Ansvarig för uppdrag:</b>
+  <%=h @task.user.login %>
+</p>
+<% end %>
+
+
+<%= link_to 'Tillbaka', tasks_path, { :class => 'button back' } %>
+<% if logged_in? && current_user.is_admin? %>
+<%= link_to '&Auml;ndra', edit_task_path(@task), {:class => 'button edit'} %>
+<% end %>
+
+<% if logged_in? %>
+<%= link_to 'Anm&auml;l mig!', new_task_path, { :class => 'button join' } %>
+<% end %>

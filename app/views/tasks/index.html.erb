@@ -1,0 +1,34 @@
+<h1>Alla uppdrag</h1>
+
+<table class="index">
+  <tr>
+    <th>Namn:</th>
+    <th>Uppdragstagare:</th>
+    <th>Bonuspo&auml;ng:</th>
+	<% if logged_in? && current_user.is_admin? %>
+	<th></th>
+    <th></th>
+	<% end %>
+  </tr>
+
+<% @tasks.each do |task| %>
+  <tr>
+    <td><%= link_to task.name, task %></td>
+    <td>
+      <%- if task.user != nil -%>
+        <%= link_to task.user.login, task.user %>
+      <%- end -%>
+    </td>
+	<td><%= task.credits %></td>
+    <% if logged_in? && current_user.is_admin? %>
+	<td class="icon"><%= link_to image_tag("/images/silk-icons/pencil.png", :border => 0, :alt => '&Auml;ndra'), edit_task_path(task) %></td>
+    <td class="icon"><%= link_to image_tag("/images/silk-icons/cross.png", :border => 0, :alt => 'Ta bort'), task, :confirm => 'Are you sure?', :method => :delete %></td>
+	<% end %>
+  </tr>
+<% end %>
+</table>
+
+
+<% if logged_in? && current_user.is_admin? %>
+<%= link_to 'Nytt uppdrag', new_task_path, { :class => 'button add' } %>
+<% end %>

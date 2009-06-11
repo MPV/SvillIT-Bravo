@@ -1,0 +1,12 @@
+<h1>&Auml;ndrar annonsplats</h1>
+
+<% form_for(@advertising_space) do |f| %>
+  <%= f.error_messages %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <p>
+    <%= f.submit 'Uppdatera' %>
+  </p>
+<% end %>
+
+<%= link_to 'Tillbaka', advertising_spaces_path, { :class => 'button back' } %>
+<%= link_to 'Visa', @advertising_space, { :class => 'button show' } %>

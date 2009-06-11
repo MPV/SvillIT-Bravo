@@ -1,0 +1,30 @@
+<h1>Alla faciliteter</h1>
+
+<table class="index">
+  <tr>
+    <th>Namn</th>
+    <th>Typ</th>
+    <th>Timpris</th>
+    <% if logged_in? && current_user.is_admin %>
+    <th></th>
+    <th></th>
+    <% end %>
+  </tr>
+
+<% @facilities.each do |facility| %>
+  <tr>
+    <td><%= link_to facility.name, facility %></td>
+    <td><%=h facility.facility_type %></td>
+    <td><%= number_to_currency(facility.hourly_fee) %></td>
+    <% if logged_in? && current_user.is_admin %>
+    <td class="icon"><%= link_to image_tag("/images/silk-icons/pencil.png", :border => 0, :alt => '&Auml;ndra'), edit_facility_path(facility) %></td>
+    <td class="icon"><%= link_to image_tag("/images/silk-icons/cross.png", :border => 0, :alt => 'Ta bort'), facility, :confirm => '&Auml;r du s&auml;ker?', :method => :delete %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<% if logged_in? && current_user.is_admin %>
+  <%= link_to 'Ny facilitet', new_facility_path, { :class => 'button add' } %> 
+<% end %>

@@ -1,0 +1,20 @@
+<h1>Alla annons&ouml;rer</h1>
+
+<table class="index">
+  <tr>
+    <th>Namn</th>
+	<th></th>
+	<th></th>
+  </tr>
+
+<% @advertisers.each do |advertiser| %>
+  <tr>
+    <td><%= link_to advertiser.name, advertiser %></td>
+    <td class="icon"><%= link_to image_tag("/images/silk-icons/pencil.png", :border => 0, :alt => '&Auml;ndra'), edit_advertiser_path(advertiser) %></td>
+    <td class="icon"><%= link_to image_tag("/images/silk-icons/cross.png", :border => 0, :alt => 'Ta bort'), advertiser, :confirm => '&Auml;r du s&auml;ker?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+
+<%= link_to 'Ny annons&ouml;r', new_advertiser_path, { :class => 'button add' } %>

@@ -1,0 +1,12 @@
+<h1>&Auml;ndra anv&auml;ndare</h1>
+
+<% form_for(@user) do |f| %>
+  <%= f.error_messages %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <p>
+    <%= f.submit 'Uppdatera' %>
+  </p>
+<% end %>
+
+<%= link_to 'Tillbaka', users_path, { :class => 'button back' } %>
+<%= link_to 'Visa', @user, { :class => 'button show' } %>

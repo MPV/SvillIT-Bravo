@@ -1,0 +1,17 @@
+<p>
+  <%= f.label :name, "Namn" %><br />
+  <%= f.text_field :name %>
+</p>
+<p>
+  <%= f.label :description, "Beskrivning" %><br />
+  <%= f.text_area :description %>
+</p>
+<p>
+  <%= f.label :facility_type, "Typ" %><br />
+  <%#= f.text_field :facility_type %>
+  <%= f.select :facility_type, ["Lokal", "Träningsanläggning"] %>
+</p>
+<p>
+  <%= f.label :hourly_fee, "Timpris" %><br />
+  <%= f.text_field :hourly_fee %> kr
+</p>

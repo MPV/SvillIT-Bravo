@@ -1,0 +1,93 @@
+<h1>Svillevi idrottsf&ouml;rening</h1>
+<p>DIN idrottsf&ouml;rening.</p>
+
+<% if logged_in? && current_user.is_admin? %>
+
+<div class="block">
+<h2>Kommande bokningar:</h2>
+<div class="block-content">
+<% if @bookings.count > 0 %>
+<ul>
+<% for booking in @bookings %>
+<li><%= link_to booking.name, booking %></li>
+<% end %>
+</ul>
+<% else %>
+<p>Det finns inte n&aring;gra bokningar i systemet &auml;nnu.</p>
+<% end %>
+<%#= render :partial => 'my_activities' %>
+</div>
+</div>
+
+<div class="block">
+<h2>Medlemmar som ej betalt sin avgift:</h2>
+<div class="block-content">
+<% if @unpaid_users.count > 0 %>
+<ul>
+<% for user in @unpaid_users %>
+<li><%= link_to user.name, user %></li>
+<% end %>
+</ul>
+<% else %>
+<p>Det finns inte n&aring;gra medlemmar som inte har betalt.</p>
+<% end %>
+<%#= render :partial => 'my_activities' %>
+</div>
+</div>
+
+<% elsif logged_in? %>
+
+<div class="block">
+<h2>Mina aktiviteter:</h2>
+<div class="block-content">
+<% if current_user.activities.count > 0 %>
+<ul>
+<% current_user.activities.each do |activity| %>
+<li><%= link_to activity.name, activity %></li>
+<% end %>
+</ul>
+<% else %>
+<p>Du har inte anm&auml;lt dig till n&aring;gra aktiviteter &auml;nnu.</p>
+<% end %>
+<%#= render :partial => 'my_activities' %>
+</div>
+</div>
+
+<!--
+<div class="block">
+<h2>Mina sektioners kommande aktiviteter:</h2>
+<div class="block-content">
+<% for group in current_user.groups %>
+<strong><%= link_to group.name, group %>:</strong>
+<ul>
+<%# for activity in group.activities %>
+<li><%#= activity.name %></li>
+<%# end %>
+</ul>
+<% end %>
+</div>
+</div>
+-->
+
+<div class="block">
+<h2>Mina uppdrag:</h2>
+<div class="block-content">
+<% if current_user.tasks.count > 0 %>
+<ul>
+<% for task in current_user.tasks %>
+<li><%= link_to task.name, task %></li>
+<% end %>
+</ul>
+<% else %>
+<p>Du har inte &aring;tagit dig n&aring;gra uppdrag &auml;nnu.</p>
+<% end %>
+</div>
+</div>
+
+<% else %>
+
+<h2>Sponsorer:</h2>
+
+<%= image_tag('/images/ituniv.gif') %>
+
+<% end %>

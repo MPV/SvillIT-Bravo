@@ -1,0 +1,11 @@
+<h1>Ny reklamplats</h1>
+
+<% form_for(@advertising_space) do |f| %>
+  <%= f.error_messages %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <p>
+    <%= f.submit 'Skapa' %>
+  </p>
+<% end %>
+
+<%= link_to 'Tillbaka', advertising_spaces_path, {:class => 'button back'} %>

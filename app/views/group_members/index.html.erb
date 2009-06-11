@@ -1,0 +1,25 @@
+<h1>Alla medlemsskap</h1>
+
+<table class="index">
+  <tr>
+    <th>Grupp:</th>
+    <th>Person:</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @group_members.each do |group_member| %>
+  <tr>
+    <td><%= link_to group_member.group.name, group_member.group %></td>
+    <td><%= link_to group_member.user.login, group_member.user %></td>
+    <td class="icon"><%= link_to 'Visa', group_member %></td>
+    <td class="icon"><%= link_to '&Auml;ndra', edit_group_member_path(group_member) %></td>
+    <td class="icon"><%= link_to 'Ta bort', group_member, :confirm => '&Auml;r du s&auml;ker?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nytt medlemsskap', new_group_member_path, { :class => 'button new' } %>

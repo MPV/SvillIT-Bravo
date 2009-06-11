@@ -1,0 +1,59 @@
+<h1><%=h @group.name %></h1>
+
+<p>
+  <b>Sektion:</b>
+  <%=h @group.section.name %>
+  <br />
+<% if @group.coach_id != nil %>
+  <b>Tr&auml;nare:</b>
+  <%= link_to @coach.login, @coach %>
+<% end %>
+</p>
+
+<% if @group.subgroups.count > 0 %>
+<h2><%= @group.subgroups.count %> undergrupper:</h2>
+
+<ul>
+<% for group in @group.subgroups %>
+<li><%= link_to group.name, group %></li>
+<% end %>
+</ul>
+<% else %>
+<p>Inga undergrupper.</p>
+<% end %>
+
+<% if @group.users.count > 0 %>
+<h2><%= @group.users.count %> gruppmedlemmar:</h2>
+
+<ul>
+<% for membership in @group.memberships %>
+<li>
+<%= link_to membership.user.name, membership.user %>
+<% if logged_in? && current_user.id == membership.user.id %>
+(<%= link_to 'G&aring; ur grupp', membership, :method => :delete %>)
+<% end %>
+</li>
+<% end %>
+</ul>
+<% else %>
+<h2>Gruppmedlemmar:</h2>
+<p>Inga gruppmedlemmar.</p>
+<% end %>
+
+<% unless logged_in? %>
+<p>
+  F&ouml;r att kunna g&aring; med i gruppen beh&ouml;ver du vara inloggad.
+</p>
+<% end %>
+
+<%- if @group.parent_id == nil -%>
+<%= link_to 'Tillbaka till ' + @group.section.name, @group.section, { :class => 'button back' } %>
+<%- else -%>
+<%= link_to 'Tillbaka till ' + @group.parent.name, @group.parent, { :class => 'button back' } %>
+<%- end -%>
+<%- if logged_in? && current_user.is_admin? -%>
+<%= link_to '&Auml;ndra', edit_group_path(@group), { :class => 'button edit' } %>
+<%- end -%>
+<% if logged_in? %>
+  <%= link_to 'G&aring; med i gruppen!', { :controller => :memberships, :action => 'create', :membership => { :user_id => current_user.id, :group_id => @group.id } }, { :method => :post, :class => 'button join' } %>
+<% end %>

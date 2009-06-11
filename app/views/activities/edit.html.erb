@@ -1,0 +1,10 @@
+<h1>&Auml;ndrar aktivitet</h1>
+
+<% form_for(@activity) do |f| %>
+  <%= f.error_messages %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <%= f.submit 'Uppdatera' %>
+  <%= link_to 'Tillbaka', activities_path, { :class => 'button back' } %>
+  <%= link_to 'Visa', @activity, { :class => 'button show' } %>
+<% end %>
+

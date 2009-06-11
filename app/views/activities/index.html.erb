@@ -1,0 +1,36 @@
+<h1>Alla aktiviteter</h1>
+
+<table class="index">
+  <tr>
+    <th>Aktivitet:</th>
+    <th>Var?</th>
+    <th>N&auml;r?</th>
+    <th>Deltagare:</th>
+    <th>Resultat?</th>
+	<th>Typ:</th>
+	<%- if logged_in? -%>
+    <th></th>
+    <th></th>
+    <%- end -%>
+  </tr>
+
+<% @activities.each do |activity| %>
+  <tr>
+    <td><%= link_to activity.name, activity %></td>
+    <td><%= link_to activity.facility.name, activity.facility %></td>
+    <td><%= activity.start.day %>:e <%= activity.start.strftime '%B' %> kl <%=h activity.start.strftime '%H:%M' %>-<%=h activity.end.strftime '%H:%M' %></td>
+    <td><%= activity.participants.count %></td>
+    <td><%- if activity.result != nil -%><%= link_to 'Ja', activity.result %><%- end -%></td>
+	<td><%= activity.activity_type %></td>
+    <%- if logged_in? && ( current_user.is_admin? || current_user.is_coach? )-%>
+    <td class="icon"><%= link_to image_tag("/images/silk-icons/pencil.png", :border => 0, :alt => '&Auml;ndra'), edit_activity_path(activity) %></td>
+    <td class="icon"><%= link_to image_tag("/images/silk-icons/cross.png", :border => 0, :alt => 'Ta bort'), activity, :confirm => '&Auml;r du s&auml;ker?', :method => :delete %></td>
+    <%- end -%>
+  </tr>
+<% end %>
+</table>
+
+<% if logged_in? && ( current_user.is_admin? || current_user.is_coach? ) %>
+<br />
+<%= link_to 'Ny aktivitet', new_activity_path, { :class => 'button add' } %>
+<% end %>

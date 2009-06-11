@@ -1,0 +1,48 @@
+<h1><%=h @facility.name %></h1>
+
+<p>
+  <%=h @facility.description %>
+</p>
+
+<p>
+  <b>Typ:</b>
+  <%=h @facility.facility_type %>
+</p>
+
+<% if(@facility.hourly_fee != nil) %>
+<p>
+  <b>Timpris:</b>
+  <%=h @facility.hourly_fee %> kr
+</p>
+<% end %>
+
+<br />
+
+<h2>Aktiviteter i <%=h @facility.facility_type.downcase %>en:</h2>
+<%- if @facility.activities.count > 0 -%>
+<ul>
+  <% for activity in @facility.activities %>
+    <li><%= link_to activity.name, activity %>, <%= activity.start %></li>
+  <% end %>
+</ul>
+<%- else -%>
+<p>Inga aktiviteter.</p>
+<%- end -%>
+
+<br/>
+
+<h2>Bokningar av <%=h @facility.facility_type.downcase %>en:</h2>
+<%- if @facility.bookings.count > 0 -%>
+<ul>
+  <% for booking in @facility.bookings %>
+    <li><%= link_to booking.name, booking %></li>
+  <% end %>
+</ul>
+<%- else -%>
+<p>Inga bokningar.</p>
+<%- end -%>
+
+<%= link_to 'Tillbaka', facilities_path, { :class => 'button back' } %>
+<%- if logged_in? && current_user.is_admin? -%>
+<%= link_to '&Auml;ndra', edit_facility_path, { :class => 'button edit' } %>
+<%- end -%>
